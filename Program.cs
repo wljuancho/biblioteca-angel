@@ -17,16 +17,16 @@ class Program
                     BooksMenu();
                     break;
                 case "2":
-                    Console.WriteLine("Acción: abrir menú de usuarios.");
+                    ShowUsersMenu();
                     break;
                 case "3":
-                    Console.WriteLine("Acción: abrir menú de préstamos.");
+                    ShowLoansMenu();
                     break;
                 case "4":
-                    Console.WriteLine("Acción: abrir menú de búsquedas y reportes.");
+                    ShowSearchReportsMenu();
                     break;
                 case "5":
-                    Console.WriteLine("Acción: abrir menú de guardar y cargar datos.");
+                    ShowPersistenceMenu();
                     break;
                 case "6":
                     continuar = ConfirmExitAndSave();
@@ -228,7 +228,7 @@ class Program
         Console.WriteLine("Acción simulada: validar que el libro no esté prestado antes de eliminarlo.");
     }
 
-    static void UsersMenu()
+    static void ShowUsersMenu()
     {
         bool volver = false;
 
@@ -325,7 +325,7 @@ class Program
     {
         Console.WriteLine("Acción simulada: validar que el usuario no tenga préstamos activos antes de eliminarlo.");
     }
-    static void LoansMenu()
+    static void ShowLoansMenu()
     {
         bool volver = false;
         while (!volver)
@@ -398,7 +398,7 @@ class Program
     static void ViewLoanDetail() { Console.WriteLine("Acción simulada: mostrar el detalle de un préstamo por ID."); }
     static void RegisterReturn() { Console.WriteLine("Acción simulada: marcar el préstamo como devuelto y el libro como disponible."); }
     static void DeleteLoan() { Console.WriteLine("Acción simulada: eliminar préstamo solo si está cerrado o fue creado por error; si está activo, devolver el libro automáticamente."); }
-    static void SearchReportsMenu()
+    static void ShowSearchReportsMenu()
     {
         bool volver = false;
         while (!volver)
@@ -459,7 +459,7 @@ class Program
     static void ReportByBook() { Console.WriteLine("Acción simulada: generar reporte de préstamos por libro."); }
     static void ReportOverdue() { Console.WriteLine("Acción simulada: generar reporte de préstamos vencidos."); }
     static void ReportSummary() { Console.WriteLine("Acción simulada: generar resumen general de libros y préstamos."); }
-    static void PersistenceMenu()
+    static void ShowPersistenceMenu()
     {
         bool volver = false;
         while (!volver)
@@ -539,6 +539,7 @@ class Program
         }
     }
 }
+
 
 
 
