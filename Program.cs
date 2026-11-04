@@ -228,6 +228,103 @@ class Program
         Console.WriteLine("Acción simulada: validar que el libro no esté prestado antes de eliminarlo.");
     }
 
+    static void UsersMenu()
+    {
+        bool volver = false;
+
+        while (!volver)
+        {
+            Console.WriteLine("--------- MENÚ USUARIOS ---------");
+            Console.WriteLine("2.1 Registrar usuario");
+            Console.WriteLine("2.2 Listar usuarios");
+            Console.WriteLine("2.3 Ver detalle por ID/documento");
+            Console.WriteLine("2.4 Actualizar usuario");
+            Console.WriteLine("2.4.1 Editar nombre");
+            Console.WriteLine("2.4.2 Editar contacto");
+            Console.WriteLine("2.4.3 Activar/desactivar");
+            Console.WriteLine("2.5 Eliminar usuario");
+            Console.WriteLine("0 o volver: Volver al menú principal");
+            Console.Write("Seleccione una opción: ");
+
+            string opcion = Console.ReadLine()?.Trim().ToLowerInvariant() ?? "";
+            switch (opcion)
+            {
+                case "2.1": RegisterUser(); break;
+                case "2.2": ListUsers(); break;
+                case "2.3": ViewUserDetail(); break;
+                case "2.4.1": EditUserName(); break;
+                case "2.4.2": EditUserContact(); break;
+                case "2.4.3": ToggleUserActiveStatus(); break;
+                case "2.4": UpdateUserMenu(); break;
+                case "2.5": DeleteUser(); break;
+                case "0":
+                case "volver": volver = true; break;
+                default: Console.WriteLine("Opción no válida. Seleccione una opción del menú de usuarios o escriba volver."); break;
+            }
+            Console.WriteLine();
+        }
+    }
+
+    static void RegisterUser()
+    {
+        Console.WriteLine("Acción simulada: registrar un nuevo usuario.");
+    }
+
+    static void ListUsers()
+    {
+        Console.WriteLine("Acción simulada: listar todos los usuarios.");
+    }
+
+    static void ViewUserDetail()
+    {
+        Console.WriteLine("Acción simulada: mostrar el detalle de un usuario por ID o documento.");
+    }
+
+    static void UpdateUserMenu()
+    {
+        bool volver = false;
+        while (!volver)
+        {
+            Console.WriteLine("--------- ACTUALIZAR USUARIO ---------");
+            Console.WriteLine("2.4.1 Editar nombre");
+            Console.WriteLine("2.4.2 Editar contacto");
+            Console.WriteLine("2.4.3 Activar/desactivar");
+            Console.WriteLine("0 o volver: Volver al menú de usuarios");
+            Console.Write("Seleccione una opción: ");
+            string opcion = Console.ReadLine()?.Trim().ToLowerInvariant() ?? "";
+
+            switch (opcion)
+            {
+                case "2.4.1": EditUserName(); break;
+                case "2.4.2": EditUserContact(); break;
+                case "2.4.3": ToggleUserActiveStatus(); break;
+                case "0":
+                case "volver": volver = true; break;
+                default: Console.WriteLine("Opción no válida. Seleccione una opción o escriba volver."); break;
+            }
+            Console.WriteLine();
+        }
+    }
+
+    static void EditUserName()
+    {
+        Console.WriteLine("Acción simulada: editar el nombre de un usuario.");
+    }
+
+    static void EditUserContact()
+    {
+        Console.WriteLine("Acción simulada: editar el contacto de un usuario.");
+    }
+
+    static void ToggleUserActiveStatus()
+    {
+        Console.WriteLine("Acción simulada: activar o desactivar el estado de un usuario.");
+    }
+
+    static void DeleteUser()
+    {
+        Console.WriteLine("Acción simulada: validar que el usuario no tenga préstamos activos antes de eliminarlo.");
+    }
     static bool ConfirmExitAndSave()
     {
         while (true)
@@ -252,3 +349,4 @@ class Program
         }
     }
 }
+
