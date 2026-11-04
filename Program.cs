@@ -459,6 +459,58 @@ class Program
     static void ReportByBook() { Console.WriteLine("Acción simulada: generar reporte de préstamos por libro."); }
     static void ReportOverdue() { Console.WriteLine("Acción simulada: generar reporte de préstamos vencidos."); }
     static void ReportSummary() { Console.WriteLine("Acción simulada: generar resumen general de libros y préstamos."); }
+    static void PersistenceMenu()
+    {
+        bool volver = false;
+        while (!volver)
+        {
+            Console.WriteLine("--------- GUARDAR / CARGAR DATOS ---------");
+            Console.WriteLine("5.1 Guardar datos");
+            Console.WriteLine("5.2 Cargar datos");
+            Console.WriteLine("5.3 Reiniciar datos");
+            Console.WriteLine("0 o volver: Volver al menú principal");
+            Console.Write("Seleccione una opción: ");
+            string opcion = Console.ReadLine()?.Trim().ToLowerInvariant() ?? "";
+
+            switch (opcion)
+            {
+                case "5.1": SaveData(); break;
+                case "5.2": LoadData(); break;
+                case "5.3": ResetData(); break;
+                case "0":
+                case "volver": volver = true; break;
+                default: Console.WriteLine("Opción no válida. Seleccione una opción o escriba volver."); break;
+            }
+            Console.WriteLine();
+        }
+    }
+
+    static void SaveData() { Console.WriteLine("Acción simulada: guardar los datos del sistema."); }
+    static void LoadData() { Console.WriteLine("Acción simulada: cargar los datos guardados del sistema."); }
+
+    static void ResetData()
+    {
+        if (ConfirmResetData())
+        {
+            Console.WriteLine("Acción simulada confirmada: reiniciar todos los datos.");
+        }
+        else
+        {
+            Console.WriteLine("Reinicio cancelado. No se modificaron los datos.");
+        }
+    }
+
+    static bool ConfirmResetData()
+    {
+        while (true)
+        {
+            Console.Write("¿Está seguro de reiniciar todos los datos? (S/N): ");
+            string respuesta = Console.ReadLine()?.Trim().ToUpperInvariant() ?? "";
+            if (respuesta == "S") return true;
+            if (respuesta == "N") return false;
+            Console.WriteLine("Respuesta no válida. Debe escribir S o N.");
+        }
+    }
     static bool ConfirmExitAndSave()
     {
         while (true)
@@ -483,6 +535,7 @@ class Program
         }
     }
 }
+
 
 
 
