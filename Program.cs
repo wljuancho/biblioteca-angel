@@ -511,6 +511,10 @@ class Program
             Console.WriteLine("Respuesta no válida. Debe escribir S o N.");
         }
     }
+    static bool ExitApplication()
+    {
+        return ConfirmExitAndSave() == false;
+    }
     static bool ConfirmExitAndSave()
     {
         while (true)
@@ -535,6 +539,7 @@ class Program
         }
     }
 }
+
 
 
 
