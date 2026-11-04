@@ -398,6 +398,67 @@ class Program
     static void ViewLoanDetail() { Console.WriteLine("Acción simulada: mostrar el detalle de un préstamo por ID."); }
     static void RegisterReturn() { Console.WriteLine("Acción simulada: marcar el préstamo como devuelto y el libro como disponible."); }
     static void DeleteLoan() { Console.WriteLine("Acción simulada: eliminar préstamo solo si está cerrado o fue creado por error; si está activo, devolver el libro automáticamente."); }
+    static void SearchReportsMenu()
+    {
+        bool volver = false;
+        while (!volver)
+        {
+            Console.WriteLine("--------- BÚSQUEDAS Y REPORTES ---------");
+            Console.WriteLine("4.1 Buscar libro");
+            Console.WriteLine("4.2 Buscar usuario");
+            Console.WriteLine("4.3 Reportes");
+            Console.WriteLine("0 o volver: Volver al menú principal");
+            Console.Write("Seleccione una opción: ");
+            string opcion = Console.ReadLine()?.Trim().ToLowerInvariant() ?? "";
+
+            switch (opcion)
+            {
+                case "4.1": SearchBook(); break;
+                case "4.2": SearchUser(); break;
+                case "4.3": ReportsMenu(); break;
+                case "0":
+                case "volver": volver = true; break;
+                default: Console.WriteLine("Opción no válida. Seleccione una opción o escriba volver."); break;
+            }
+            Console.WriteLine();
+        }
+    }
+
+    static void SearchBook() { Console.WriteLine("Acción simulada: buscar un libro por título, autor, ID/ISBN o categoría."); }
+    static void SearchUser() { Console.WriteLine("Acción simulada: buscar un usuario por nombre o ID/documento."); }
+
+    static void ReportsMenu()
+    {
+        bool volver = false;
+        while (!volver)
+        {
+            Console.WriteLine("--------- REPORTES ---------");
+            Console.WriteLine("4.3.1 Préstamos por usuario");
+            Console.WriteLine("4.3.2 Préstamos por libro");
+            Console.WriteLine("4.3.3 Préstamos vencidos");
+            Console.WriteLine("4.3.4 Resumen general");
+            Console.WriteLine("0 o volver: Volver a búsquedas y reportes");
+            Console.Write("Seleccione una opción: ");
+            string opcion = Console.ReadLine()?.Trim().ToLowerInvariant() ?? "";
+
+            switch (opcion)
+            {
+                case "4.3.1": ReportByUser(); break;
+                case "4.3.2": ReportByBook(); break;
+                case "4.3.3": ReportOverdue(); break;
+                case "4.3.4": ReportSummary(); break;
+                case "0":
+                case "volver": volver = true; break;
+                default: Console.WriteLine("Opción no válida. Seleccione un reporte o escriba volver."); break;
+            }
+            Console.WriteLine();
+        }
+    }
+
+    static void ReportByUser() { Console.WriteLine("Acción simulada: generar reporte de préstamos por usuario."); }
+    static void ReportByBook() { Console.WriteLine("Acción simulada: generar reporte de préstamos por libro."); }
+    static void ReportOverdue() { Console.WriteLine("Acción simulada: generar reporte de préstamos vencidos."); }
+    static void ReportSummary() { Console.WriteLine("Acción simulada: generar resumen general de libros y préstamos."); }
     static bool ConfirmExitAndSave()
     {
         while (true)
@@ -422,5 +483,6 @@ class Program
         }
     }
 }
+
 
 
