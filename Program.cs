@@ -1,10 +1,13 @@
 ﻿using System;
+using Biblioteca_angel.Models;
 
 class Program
 {
     static void Main()
     {
         bool continuar = true;
+
+        MostrarObjetosDePrueba();
 
         while (continuar)
         {
@@ -537,6 +540,67 @@ class Program
 
             Console.WriteLine("Respuesta no válida. Debe escribir S o N.");
         }
+    }
+
+    static void MostrarObjetosDePrueba()
+    {
+        Console.WriteLine("========= OBJETOS DE PRUEBA - MODELO DE DOMINIO =========");
+        Console.WriteLine();
+
+        Libro libro1 = new Libro(1, "Cien años de soledad", "Gabriel García Márquez", "978-958-30-0000-1", 1967, "Novela");
+        Libro libro2 = new Libro(2, "Don Quijote de la Mancha", "Miguel de Cervantes", "978-84-30-0000-2", 1605, "Novela");
+
+        Usuario usuario1 = new Usuario(1, "Juan Pérez", "12345678", "juan@email.com", "3000000001");
+        Usuario usuario2 = new Usuario(2, "María Gómez", "87654321", "maria@email.com", "3000000002");
+
+        Prestamo prestamo1 = new Prestamo(1, 1, 1, DateTime.Now.AddDays(-5));
+
+        Console.WriteLine("--- LIBROS ---");
+        Console.WriteLine(libro1.ResumenCorto());
+        Console.WriteLine(libro2.ResumenCorto());
+        Console.WriteLine();
+
+        Console.WriteLine("--- DETALLE COMPLETO LIBROS ---");
+        Console.WriteLine(libro1.DetalleCompleto());
+        Console.WriteLine();
+        Console.WriteLine(libro2.DetalleCompleto());
+        Console.WriteLine();
+
+        Console.WriteLine("--- VALIDACIÓN LIBRO 1 ---");
+        Console.WriteLine($"Disponible: {libro1.Disponible}");
+        Console.WriteLine();
+
+        Console.WriteLine("--- USUARIOS ---");
+        Console.WriteLine(usuario1.ResumenCorto());
+        Console.WriteLine(usuario2.ResumenCorto());
+        Console.WriteLine();
+
+        Console.WriteLine("--- DETALLE COMPLETO USUARIOS ---");
+        Console.WriteLine(usuario1.DetalleCompleto());
+        Console.WriteLine();
+        Console.WriteLine(usuario2.DetalleCompleto());
+        Console.WriteLine();
+
+        Console.WriteLine("--- VALIDACIÓN USUARIO 1 ---");
+        Console.WriteLine($"Activo: {usuario1.Activo}");
+        Console.WriteLine();
+
+        Console.WriteLine("--- PRÉSTAMO ---");
+        Console.WriteLine(prestamo1.ResumenCorto());
+        Console.WriteLine();
+
+        Console.WriteLine("--- DETALLE COMPLETO PRÉSTAMO ---");
+        Console.WriteLine(prestamo1.DetalleCompleto());
+        Console.WriteLine();
+
+        Console.WriteLine("--- VALIDACIONES PRÉSTAMO ---");
+        Console.WriteLine($"Estado: {prestamo1.Estado}");
+        Console.WriteLine($"EstaVencido(): {prestamo1.EstaVencido()}");
+        Console.WriteLine($"Días transcurridos: {prestamo1.DiasTranscurridos()}");
+        Console.WriteLine();
+
+        Console.WriteLine("=========================================================");
+        Console.WriteLine();
     }
 }
 
