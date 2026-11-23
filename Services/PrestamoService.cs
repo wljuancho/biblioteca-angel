@@ -4,6 +4,8 @@ namespace Biblioteca_angel.Services;
 
 public class PrestamoService
 {
+    // La guía no fija el plazo; se toma un período de 14 días para calcular la fecha límite.
+    private const int DiasMaximosPrestamo = 14;
     private readonly List<Prestamo> _prestamos = new();
 
     public void AgregarPrestamo(Prestamo prestamo)
@@ -26,5 +28,22 @@ public class PrestamoService
     public IReadOnlyList<Prestamo> ObtenerTodos()
     {
         return _prestamos.AsReadOnly();
+    }
+
+    public Prestamo? BuscarPorId(byte id)
+    {
+        return _prestamos.Find(prestamo => prestamo.Id == id);
+    }
+
+    public IReadOnlyList<Prestamo> BuscarPorEstado(EstadoPrestamo estado)
+    {
+        return _prestamos.Where(prestamo => prestamo.Estado == estado).ToList();
+    }
+
+    public IReadOnlyList<Prestamo> ObtenerOrdenadosPorFechaLimite()
+    {
+        return _prestamos
+            .OrderBy(prestamo => prestamo.FechaPrestamo.AddDays(DiasMaximosPrestamo))
+            .ToList();
     }
 }
