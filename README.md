@@ -1,82 +1,61 @@
 # Sistema de Biblioteca en C#
 
-Proyecto de consola desarrollado para la evidencia **220501097-04-AA1 – EV06: Aplicación de la sintaxis básica de C# - Funciones**.
+Proyecto de consola desarrollado para la evidencia **220501097-04-AA1 – EV07: Definición de clases y objetos base del sistema de biblioteca en C# aplicando programación orientada a objetos y Git Flow**.
 
 ## Descripción
 
-Aplicación de consola con navegación interactiva entre el menú principal y sus submenús. Las operaciones se representan mediante funciones `static` que muestran mensajes descriptivos, sin clases de dominio, colecciones reales, CRUD real ni persistencia real.
+La aplicación conserva los menús funcionales desarrollados en EV06 e incorpora el modelo de dominio básico de la biblioteca. Las clases `Libro`, `Usuario` y `Prestamo`, junto con el enumerador `EstadoPrestamo`, están organizadas en `Models/`. La opción 7 del menú principal muestra objetos de prueba y sus propiedades y métodos.
 
-## Requisitos técnicos cumplidos
+## Modelo de dominio
 
-- Menú principal funcional.
-- Submenús completos para libros, usuarios, préstamos, búsquedas/reportes y datos.
-- Navegación real entre menús.
-- Opciones para volver al menú anterior.
-- Validación de opciones y entradas inválidas.
-- Confirmaciones `S/N` para reiniciar datos y salir.
-- Funciones `static`, `switch`, `if` y ciclos `while`.
-- Sin POO ni persistencia real.
+- `Models/Libro.cs`: propiedades, constructores, disponibilidad inicial, resumen, detalle y `ToString()`.
+- `Models/Usuario.cs`: propiedades, constructores, estado activo inicial, resumen, detalle y `ToString()`.
+- `Models/EstadoPrestamo.cs`: estados `Activo`, `Devuelto` y `Vencido`.
+- `Models/Prestamo.cs`: fechas `DateTime` y `DateTime?`, estado inicial activo, fecha de devolución nula y métodos de resumen, detalle, vencimiento y días transcurridos.
 
-## Menús
+## Ejecutar
 
-### Menú principal
+Requisitos: Git y el SDK de .NET compatible con `Biblioteca-angel.csproj`.
 
-1. Libros
-2. Usuarios
-3. Préstamos
-4. Búsquedas y reportes
-5. Guardar / Cargar datos
-6. Salir
-
-### Navegación
-
-- Las opciones numeradas permiten acceder a cada módulo.
-- Escriba `0` o `volver` para regresar al menú anterior.
-- Las opciones inválidas muestran un mensaje y permiten repetir la elección.
-- La salida pregunta si se deben guardar los datos antes de finalizar.
-
-## Ejecución
-
-Requisitos:
-
-- Git instalado.
-- .NET SDK compatible con el proyecto configurado.
-
-Ejecutar desde la carpeta del proyecto:
+Desde la carpeta del proyecto:
 
 ```powershell
 dotnet run
 ```
 
+En el menú principal, seleccione **7. Demostrar objetos de prueba (EV07)** para ver:
+
+- Dos libros y dos usuarios, con resúmenes y detalles.
+- Un préstamo, con resumen, detalle, estado, validación `EstaVencido()` y días transcurridos.
+- Los valores iniciales `Disponible = true` y `Activo = true`.
+
+La opción 6 conserva la salida del sistema.
+
 ## Git Flow aplicado
 
-Ramas utilizadas:
+- `main`: versión integrada de entrega.
+- `develop`: integración progresiva del proyecto.
+- Ramas de funcionalidad conservadas en el repositorio remoto:
+  - `feature/main-menu-navigation`
+  - `feature/books-menu`
+  - `feature/users-menu`
+  - `feature/loans-menu`
+  - `feature/search-reports-menu`
+  - `feature/persistence-menu`
+  - `feature/exit-flow`
+  - `feature/models-libro`
+  - `feature/models-usuario`
+  - `feature/models-prestamo`
+  - `feature/models-enum-estado-prestamo`
+  - `feature/models-testing-objetos`
+- Ramas de soporte: `fix/menu-integration` y `docs/update-readme`.
 
-- `main`: versión integrada entregable.
-- `develop`: integración de los módulos.
-- `feature/main-menu-navigation`
-- `feature/books-menu`
-- `feature/users-menu`
-- `feature/loans-menu`
-- `feature/search-reports-menu`
-- `feature/persistence-menu`
-- `feature/exit-flow`
-- `fix/menu-integration`
-- `docs/update-readme`
+Cada módulo se trabajó en su propia rama, con commits descriptivos y merge a `develop`. El incremento EV06 se integró previamente en `main`; el incremento EV07 se integró en `develop` y se publica en `main` mediante un merge de `develop`.
 
-No se creó ni utilizó `feature/project-bootstrap`, conforme a la decisión del proyecto.
+Convenciones usadas en los mensajes de commit:
 
-Los cambios se realizaron mediante commits con convención:
-
-- `feat:` nuevas funcionalidades.
-- `fix:` corrección de errores o integración.
+- `feat:` funcionalidad nueva.
+- `fix:` correcciones.
 - `docs:` documentación.
 
-## Historial de entrega
-
-1. Creación de ramas desde `develop`.
-2. Implementación de cada módulo por su propia rama feature.
-3. Merge de cada rama feature en `develop`.
-4. Corrección de integración fusionada en `develop`.
-5. Actualización documental en una rama `docs/`.
-6. Merge final de `develop` en `main`.
+Las ramas `feature` se mantienen después de los merges para conservar la evidencia del trabajo incremental.

@@ -7,8 +7,6 @@ class Program
     {
         bool continuar = true;
 
-        MostrarObjetosDePrueba();
-
         while (continuar)
         {
             ShowMainMenu();
@@ -31,11 +29,14 @@ class Program
                 case "5":
                     ShowPersistenceMenu();
                     break;
+                case "7":
+                    MostrarObjetosDePrueba();
+                    break;
                 case "6":
                     continuar = ConfirmExitAndSave();
                     break;
                 default:
-                    Console.WriteLine("Opción no válida. Por favor, ingrese una opción del 1 al 6.");
+                    Console.WriteLine("Opción no válida. Por favor, ingrese una opción del 1 al 7.");
                     break;
             }
 
@@ -52,6 +53,7 @@ class Program
         Console.WriteLine("4. Búsquedas y reportes");
         Console.WriteLine("5. Guardar / Cargar datos");
         Console.WriteLine("6. Salir");
+        Console.WriteLine("7. Demostrar objetos de prueba (EV07)");
         Console.Write("Seleccione una opción: ");
     }
 
