@@ -22,7 +22,7 @@ Los métodos para eliminar devuelven `true` si encontraron y eliminaron un regis
 
 ## Ejecución y demostración
 
-Requisitos: .NET 10 SDK (LTS), configurado como `net10.0` en `Biblioteca-angel.csproj`.
+Requisitos: .NET 10 SDK (LTS), configurado como `net10.0` en `Biblioteca-angel.csproj`. `global.json` selecciona una versión estable de la línea 10.x.
 
 ```powershell
 dotnet run
