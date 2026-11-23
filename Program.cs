@@ -590,6 +590,8 @@ class Program
             Console.WriteLine($"- {libro.AnioPublicacion}: {libro.Titulo}");
         }
         Console.WriteLine($"Total: {libroService.ObtenerTotalLibros()}, disponibles: {libroService.ObtenerTotalDisponibles()}, prestados: {libroService.ObtenerTotalPrestados()}");
+        Console.WriteLine($"Obtener todos: {libroService.ObtenerTodos().Count} libros.");
+        Console.WriteLine($"Eliminar libro ID 12: {libroService.EliminarLibro(12)}; registros restantes: {libroService.ObtenerTotalLibros()}");
         Console.WriteLine();
 
         UsuarioService usuarioService = new();
@@ -607,6 +609,8 @@ class Program
             Console.WriteLine($"- {usuario.Nombre}");
         }
         Console.WriteLine($"Total: {usuarioService.ObtenerTotalUsuarios()}, activos: {usuarioService.ObtenerTotalActivos()}, inactivos: {usuarioService.ObtenerTotalInactivos()}");
+        Console.WriteLine($"Obtener todos: {usuarioService.ObtenerTodos().Count} usuarios.");
+        Console.WriteLine($"Eliminar usuario ID 2: {usuarioService.EliminarUsuario(2)}; registros restantes: {usuarioService.ObtenerTotalUsuarios()}");
         Console.WriteLine();
 
         PrestamoService prestamoService = new();
@@ -628,6 +632,8 @@ class Program
         }
         Console.WriteLine($"Total: {prestamoService.ObtenerTotalPrestamos()}, activos: {prestamoService.ObtenerTotalActivos()}, vencidos: {prestamoService.ObtenerTotalVencidos()}, devueltos: {prestamoService.ObtenerTotalDevueltos()}");
         Console.WriteLine($"Promedio de días de préstamos devueltos: {prestamoService.ObtenerPromedioDiasPrestamo():F1}");
+        Console.WriteLine($"Obtener todos: {prestamoService.ObtenerTodos().Count} préstamos.");
+        Console.WriteLine($"Eliminar préstamo ID 3: {prestamoService.EliminarPrestamo(3)}; registros restantes: {prestamoService.ObtenerTotalPrestamos()}");
         Console.WriteLine();
         Console.WriteLine("========================================================");
     }
