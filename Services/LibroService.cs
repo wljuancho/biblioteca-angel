@@ -56,4 +56,19 @@ public class LibroService
     {
         return _libros.OrderBy(libro => libro.AnioPublicacion).ToList();
     }
+
+    public int ObtenerTotalLibros()
+    {
+        return _libros.Count;
+    }
+
+    public int ObtenerTotalDisponibles()
+    {
+        return _libros.Count(libro => libro.Disponible);
+    }
+
+    public int ObtenerTotalPrestados()
+    {
+        return _libros.Count(libro => !libro.Disponible);
+    }
 }

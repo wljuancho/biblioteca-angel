@@ -44,4 +44,19 @@ public class UsuarioService
     {
         return _usuarios.OrderBy(usuario => usuario.Nombre, StringComparer.OrdinalIgnoreCase).ToList();
     }
+
+    public int ObtenerTotalUsuarios()
+    {
+        return _usuarios.Count;
+    }
+
+    public int ObtenerTotalActivos()
+    {
+        return _usuarios.Count(usuario => usuario.Activo);
+    }
+
+    public int ObtenerTotalInactivos()
+    {
+        return _usuarios.Count(usuario => !usuario.Activo);
+    }
 }
