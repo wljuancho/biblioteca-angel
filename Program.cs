@@ -1,5 +1,6 @@
 ﻿using System;
 using Biblioteca_angel.Models;
+using Biblioteca_angel.Services;
 
 class Program
 {
@@ -32,11 +33,14 @@ class Program
                 case "7":
                     MostrarObjetosDePrueba();
                     break;
+                case "8":
+                    MostrarDemostracionServicios();
+                    break;
                 case "6":
                     continuar = ConfirmExitAndSave();
                     break;
                 default:
-                    Console.WriteLine("Opción no válida. Por favor, ingrese una opción del 1 al 7.");
+                    Console.WriteLine("Opción no válida. Por favor, ingrese una opción del 1 al 8.");
                     break;
             }
 
@@ -54,6 +58,7 @@ class Program
         Console.WriteLine("5. Guardar / Cargar datos");
         Console.WriteLine("6. Salir");
         Console.WriteLine("7. Demostrar objetos de prueba (EV07)");
+        Console.WriteLine("8. Demostrar colecciones y servicios (EV08)");
         Console.Write("Seleccione una opción: ");
     }
 
@@ -542,6 +547,89 @@ class Program
 
             Console.WriteLine("Respuesta no válida. Debe escribir S o N.");
         }
+    }
+
+    static void MostrarDemostracionServicios()
+    {
+        Console.WriteLine("========= DEMOSTRACIÓN EV08: LIST Y SERVICES =========");
+
+        Libro[] librosArray =
+        {
+            new Libro(10, "Cien años de soledad", "Gabriel García Márquez", "978-958-30-0000-1", 1967, "Novela"),
+            new Libro(11, "Clean Code", "Robert C. Martin", "978-0132350884", 2008, "Programación")
+        };
+
+        List<Libro> librosLista = new(librosArray);
+        librosLista.Add(new Libro(12, "1984", "George Orwell", "978-0451524935", 1949, "Distopía"));
+
+        Console.WriteLine("--- ARRAY VS LIST ---");
+        Console.WriteLine($"Array: {librosArray.Length} elementos; su tamaño es fijo.");
+        Console.WriteLine($"List: {librosLista.Count} elementos después de Add; su tamaño puede cambiar.");
+        Console.WriteLine("Ambas colecciones almacenan objetos Libro del mismo tipo.");
+        Console.WriteLine();
+
+        LibroService libroService = new();
+        foreach (Libro libro in librosLista)
+        {
+            libroService.AgregarLibro(libro);
+        }
+        libroService.ObtenerTodos()[2].Disponible = false;
+
+        Console.WriteLine("--- LIBROS: BÚSQUEDAS, ORDEN Y KPIs ---");
+        Console.WriteLine($"ISBN: {libroService.BuscarPorIsbn("978-0132350884")?.Titulo ?? "Sin resultados"}");
+        Console.WriteLine($"Título contiene 'code': {libroService.BuscarPorTitulo("code").Count}");
+        Console.WriteLine($"Autor contiene 'martin': {libroService.BuscarPorAutor("martin").Count}");
+        Console.WriteLine("Ordenados por título:");
+        foreach (Libro libro in libroService.ObtenerOrdenadosPorTitulo())
+        {
+            Console.WriteLine($"- {libro.Titulo}");
+        }
+        Console.WriteLine("Ordenados por año:");
+        foreach (Libro libro in libroService.ObtenerOrdenadosPorAnio())
+        {
+            Console.WriteLine($"- {libro.AnioPublicacion}: {libro.Titulo}");
+        }
+        Console.WriteLine($"Total: {libroService.ObtenerTotalLibros()}, disponibles: {libroService.ObtenerTotalDisponibles()}, prestados: {libroService.ObtenerTotalPrestados()}");
+        Console.WriteLine();
+
+        UsuarioService usuarioService = new();
+        Usuario usuarioActivo = new(1, "Ana Torres", "1001", "ana@email.com", "3000000001");
+        Usuario usuarioInactivo = new(2, "Carlos Ruiz", "1002", "carlos@email.com", "3000000002") { Activo = false };
+        usuarioService.AgregarUsuario(usuarioActivo);
+        usuarioService.AgregarUsuario(usuarioInactivo);
+
+        Console.WriteLine("--- USUARIOS: BÚSQUEDAS, ORDEN Y KPIs ---");
+        Console.WriteLine($"Documento 1001: {usuarioService.BuscarPorDocumento("1001")?.Nombre ?? "Sin resultados"}");
+        Console.WriteLine($"Nombre contiene 'ar': {usuarioService.BuscarPorNombre("ar").Count}");
+        Console.WriteLine("Ordenados por nombre:");
+        foreach (Usuario usuario in usuarioService.ObtenerOrdenadosPorNombre())
+        {
+            Console.WriteLine($"- {usuario.Nombre}");
+        }
+        Console.WriteLine($"Total: {usuarioService.ObtenerTotalUsuarios()}, activos: {usuarioService.ObtenerTotalActivos()}, inactivos: {usuarioService.ObtenerTotalInactivos()}");
+        Console.WriteLine();
+
+        PrestamoService prestamoService = new();
+        prestamoService.AgregarPrestamo(new Prestamo(1, 10, 1, DateTime.Today.AddDays(-2)));
+        prestamoService.AgregarPrestamo(new Prestamo(2, 11, 2, DateTime.Today.AddDays(-20)) { Estado = EstadoPrestamo.Vencido });
+        prestamoService.AgregarPrestamo(new Prestamo(3, 12, 1, DateTime.Today.AddDays(-10))
+        {
+            FechaDevolucion = DateTime.Today.AddDays(-5),
+            Estado = EstadoPrestamo.Devuelto
+        });
+
+        Console.WriteLine("--- PRÉSTAMOS: BÚSQUEDAS, ORDEN Y KPIs ---");
+        Console.WriteLine($"Préstamo ID 2: {prestamoService.BuscarPorId(2)?.Estado.ToString() ?? "Sin resultados"}");
+        Console.WriteLine($"Préstamos vencidos encontrados: {prestamoService.BuscarPorEstado(EstadoPrestamo.Vencido).Count}");
+        Console.WriteLine("Ordenados por fecha límite (14 días desde el préstamo):");
+        foreach (Prestamo prestamo in prestamoService.ObtenerOrdenadosPorFechaLimite())
+        {
+            Console.WriteLine($"- {prestamo.ResumenCorto()} | Fecha límite: {prestamo.FechaPrestamo.AddDays(14):dd/MM/yyyy}");
+        }
+        Console.WriteLine($"Total: {prestamoService.ObtenerTotalPrestamos()}, activos: {prestamoService.ObtenerTotalActivos()}, vencidos: {prestamoService.ObtenerTotalVencidos()}, devueltos: {prestamoService.ObtenerTotalDevueltos()}");
+        Console.WriteLine($"Promedio de días de préstamos devueltos: {prestamoService.ObtenerPromedioDiasPrestamo():F1}");
+        Console.WriteLine();
+        Console.WriteLine("========================================================");
     }
 
     static void MostrarObjetosDePrueba()
