@@ -47,6 +47,9 @@ Ramas EV08:
 - `feature/prestamo-service`
 - `feature/services-kpis`
 - `feature/services-demo`
+- `feature/target-net10-lts`
+- `feature/pin-dotnet10-sdk`
+- `feature/docs-activity-audit`
 
 Ramas previas conservadas: `feature/main-menu-navigation`, `feature/books-menu`, `feature/users-menu`, `feature/loans-menu`, `feature/search-reports-menu`, `feature/persistence-menu`, `feature/exit-flow`, `feature/models-libro`, `feature/models-usuario`, `feature/models-prestamo`, `feature/models-enum-estado-prestamo`, `feature/models-testing-objetos` y `feature/ev07-demo-menu`.
 
