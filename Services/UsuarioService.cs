@@ -27,4 +27,21 @@ public class UsuarioService
     {
         return _usuarios.AsReadOnly();
     }
+
+    public Usuario? BuscarPorDocumento(string documento)
+    {
+        return _usuarios.Find(usuario => string.Equals(usuario.Documento, documento, StringComparison.OrdinalIgnoreCase));
+    }
+
+    public IReadOnlyList<Usuario> BuscarPorNombre(string nombre)
+    {
+        return _usuarios
+            .Where(usuario => usuario.Nombre.Contains(nombre, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+    }
+
+    public IReadOnlyList<Usuario> ObtenerOrdenadosPorNombre()
+    {
+        return _usuarios.OrderBy(usuario => usuario.Nombre, StringComparer.OrdinalIgnoreCase).ToList();
+    }
 }
